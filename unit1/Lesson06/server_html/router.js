@@ -1,8 +1,8 @@
-const httpStatus = require("http-status-codes"),
-  htmlContentType = {
+const httpStatus = require("http-status-codes");
+const htmlContentType = {
     "Content-Type": "text/html",
-  },
-  routes = {
+  };
+const routes = {
     GET: {
       "/info": (req, res) => {
         res.writeHead(httpStatus.StatusCodes.OK, {
