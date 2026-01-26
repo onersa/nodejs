@@ -1,6 +1,7 @@
 const port = 3000;
 const express = require("express");
-const homeController = require("./controllers/homeController") 
+const homeController = require("./controllers/homeController")
+ 
 const app = express();
 
 app.use((req, res, next) => {
@@ -26,13 +27,7 @@ app.get("/", (req, res) => {
 });
 
 
-
-
-app.get("/items/:vegetable", (req, res) => {
-  let veg = req.params.vegetable;
-  console.log("Params:", req.params);
-  res.send(`This is the page for VEGETABLE`);
-});
+app.get("/items/:vegetable", homeController.sendReqParams);
 
 app.post("/", homeController.sendPostReq );
 
