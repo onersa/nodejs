@@ -1,0 +1,109 @@
+// const mongoose = require("mongoose");
+// const Subscriber = require("./models/subscriber");
+// mongoose.connect(
+//  "mongodb://localhost:27017/recipe_db"
+// );
+
+// const db =mongoose.connection;
+// db.once("open", () => {
+//     console.log('MOngoDB connected successfully to recipe_db');
+// })
+
+// const contacts = [
+//  {
+//  name: "Jon Wexler",
+//  email: "jon@jonwexler.com",
+//  zipCode: 10016
+//  },
+//  {
+//  name: "Chef Eggplant",
+//  email: "eggplant@recipeapp.com",
+//  zipCode: 20331
+//  },
+//  {
+//  name: "Professor Souffle",
+//  email: "souffle@recipeapp.com",
+//  zipCode: 19103
+//  }
+// ];
+
+// Subscriber.deleteMany()
+//  .exec()
+//  .then(() => {
+//  console.log("Subscriber data is empty!");
+//  });
+
+// const commands = [];
+
+// contacts.forEach((c) => {
+//  commands.push(Subscriber.create({
+// name: c.name,
+// email: c.email
+//  }));
+// });
+// Promise.all(commands)
+//   .then((r) => {
+//     console.log(JSON.stringify(r));
+//   })
+//   .catch((error) => {
+//     console.log(`ERROR: ${error}`);
+//   });
+
+const mongoose = require("mongoose");
+const Subscriber = require("./models/subscriber");
+
+mongoose.connect("mongodb://localhost:27017/recipe_db");
+
+let db = mongoose.connection;
+
+db.once("open", () => {
+  console.log("MongoDB connected successfully to recipe_db");
+});
+
+let contacts = [
+  {
+    name: "Jon Wexler",
+    email: "jon@jonwexler.com",
+    zipCode: 10016,
+  },
+  {
+    name: "Chef Eggplant",
+    email: "eggplant@recipeapp.com",
+    zipCode: 20331,
+  },
+  {
+    name: "Professor Souffle",
+    email: "souffle@recipeapp.com",
+    zipCode: 19103,
+  },
+];
+
+Subscriber.deleteMany()
+  .exec()
+  .then(() => {
+    console.log("Subscriber data is empty!");
+
+    // NOW create the subscribers AFTER deletion completes
+    let commands = [];
+    contacts.forEach((c) => {
+      commands.push(
+        Subscriber.create({
+          name: c.name,
+          email: c.email,
+          zipCode: c.zipCode
+        })
+      );
+    });
+
+    return Promise.all(commands);
+  })
+  .then((r) => {
+    console.log(JSON.stringify(r));
+    console.log(`Created ${r.length} subscribers`);
+  })
+  .catch((error) => {
+    console.log(`ERROR: ${error}`);
+  })
+  .then(() => {
+    mongoose.connection.close();
+  });

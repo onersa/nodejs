@@ -56,18 +56,17 @@ router.get("/confetti_cuisine.js", (req, res) => {
 });
 
 http.createServer(router.handle).listen(port);
-console.log(`The server is listening on
-➥ port number: ${port}`);
+console.log(`The server is listening on port number: ${port}`);
 
 
-http.createServer((req, res) => {
-     try {
-     routes[req.method][req.url](req, res);
-     } catch (e) {
-     res.writeHead(httpStatus.StatusCodes.OK, contentTypes.html);
-     utils.getFile("views/error.html", res);
-     }
-    });
+// http.createServer((req, res) => {
+//      try {
+//      routes[req.method][req.url](req, res);
+//      } catch (e) {
+//      res.writeHead(httpStatus.StatusCodes.OK, contentTypes.html);
+//      utils.getFile("views/error.html", res);
+//      }
+//     });
 
 
-http.listen(port);
+// http.listen(port);

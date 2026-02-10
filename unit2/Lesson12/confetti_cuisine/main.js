@@ -16,8 +16,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-//  res.send("Welcome to Confetti Cuisine!");
-throw(ex);
+// throw(ex);
 res.render("index")
 });
 

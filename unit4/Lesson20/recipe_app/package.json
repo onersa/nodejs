@@ -1,0 +1,23 @@
+{
+  "name": "first_express_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^4.16.3",
+    "express-ejs-layouts": "^2.5.1",
+    "http-status-codes": "^2.3.0",
+    "method-override": "^3.0.0",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.5"
+  }
+}
