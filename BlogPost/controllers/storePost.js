@@ -3,9 +3,11 @@ const path = require("path");
 const BlogPost = require("../models/BlogPost");
 
 module.exports = async (req, res) => {
+  console.log(`req.body ${req.body.body}`);
   const image = req.files.image;
   const myPath = path.resolve(__dirname, "../public/img", image.name);
   const blogPostBody = req.body;
+  
   blogPostBody["image"] = "/img/" + image.name;
   blogPostBody["userid"] = req.session.userId;
   console.log(`image file: ${image.name} myPath: ${myPath}`);
