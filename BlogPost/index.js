@@ -3,6 +3,7 @@ const expressSession = require("express-session");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const fileUpload = require("express-fileupload");
+const flash = require("connect-flash");
 const newPostController = require("./controllers/newPost");
 const homeController = require("./controllers/home");
 const storePostController = require("./controllers/storePost");
@@ -29,6 +30,8 @@ db.once("open" , () => {
 const port = process.env.PORT || 4000;
 
 const app = express();
+ 
+app.use(flash());
 
 app.use(
   expressSession({
